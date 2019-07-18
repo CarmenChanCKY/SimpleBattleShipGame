@@ -1,0 +1,16 @@
+
+.sea{
+    display:inline-block;
+    padding:20px 100px;
+    margin:auto;
+    
+}
+
+#set-sea{
+    width:100%;
+}
+
+#play-info{
+    width:100%;
+    display:none;
+}

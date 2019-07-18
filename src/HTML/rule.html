@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rule - BattleShip Game Play</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/index.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/setting.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--Plug-in for display div-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="../JavaScript/main.js"></script>
+    <!--Plug-in for scroll effect-->
+    <script src="../JavaScript/animatescroll.js"></script>
+    <script>
+
+        
+
+
+        $(document).ready(function () {
+            // set scroll effect
+
+            $("#top").click(function () {
+                $(".content").animatescroll({ scrollSpeed: 2000, easing: 'easeOutQuart' });
+            });
+
+            $("#horizontalA").click(function () {
+                $("#horizontal").animatescroll({ scrollSpeed: 2000, easing: 'easeOutQuart' });
+            });
+
+            $("#verticalA").click(function () {
+                $("#vertical").animatescroll({ scrollSpeed: 2000, easing: 'easeOutQuart' });
+            });
+            $("#deleteShipA").click(function () {
+                $("#deleteShip").animatescroll({ scrollSpeed: 2000, easing: 'easeOutQuart' });
+            });
+            $("#attackA").click(function () {
+                $("#attack").animatescroll({ scrollSpeed: 2000, easing: 'easeOutQuart' });
+            });
+            $("#winLossA").click(function () {
+                $("#winAndLoss").animatescroll({ scrollSpeed: 2000, easing: 'easeOutQuart' });
+            });
+            $("#seaSizeA").click(function () {
+                $("#setSeaSize").animatescroll({ scrollSpeed: 2000, easing: 'easeOutQuart' });
+            });
+            $("#shipA").click(function () {
+                $("#setShip").animatescroll({ scrollSpeed: 2000, easing: 'easeOutQuart' });
+            });
+
+            $.getJSON("../../data.json", function (data) {
+                limitForEachSeaSize(data.seaSize);
+            });
+
+
+        });
+
+        function limitForEachSeaSize(seaSize) {
+            var sec = document.createElement("section");
+            var tempTable = document.createElement("table");
+            tempTable.setAttribute("class", "seaTable");
+            tempTable.setAttribute("width", "40%");
+
+            for (var i = 0; i <= seaSize.length; i++) {
+                var tempTR = document.createElement("tr");
+                tempTR.setAttribute("class", "seaTableRow");
+                for (var j = 0; j <= 2; j++) {
+                    var tempTD = document.createElement("td");
+                    tempTD.setAttribute("class", "seaTableCell");
+
+                    if (i == 0) {
+                        if (j == 0) {
+                            tempTD.appendChild(document.createTextNode("Sea Size"));
+                        } else if (j == 1) {
+                            tempTD.appendChild(document.createTextNode("Limit"));
+                        } else if (j == 2) {
+                            tempTD.appendChild(document.createTextNode("Largest usable space"));
+                        }
+                    } else {
+                        var limit = Math.ceil(parseInt(seaSize[i - 1])**2 * 0.4);
+                        var space = parseInt(seaSize[i - 1])**2 - limit;
+                        if (j == 0) {
+                            tempTD.appendChild(document.createTextNode(seaSize[i - 1]));
+                        } else if (j == 1) {
+                            tempTD.appendChild(document.createTextNode(limit));
+                        } else if (j == 2) {
+                            tempTD.appendChild(document.createTextNode(space));
+                        }
+                    }
+                    tempTR.appendChild(tempTD);
+                }
+                tempTable.appendChild(tempTR);
+            }
+
+            document.getElementById("limit").appendChild(tempTable);
+        }
+
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="content">
+        <div class="back">
+            <button class="button" value="Back" onclick="openLink(this.value)">Back</button>
+        </div>
+
+        <div id="title">
+            <p>
+                <h1>Rule</h1>
+            </p>
+        </div>
+
+        <!--content-->
+        <div style="padding:30px; display:inline-block;">
+            <p align="center">Content</p>
+            <ul>
+                <li> Play
+                    <ul>
+                        <li>Add ship to sea</li>
+                        <ul>
+                            <li>
+                                <a id="horizontalA">Horizontal</a>
+                            </li>
+                            <li>
+                                <a id="verticalA">Vertical</a>
+                            </li>
+                        </ul>
+                </li>
+                <li>
+                    <a id="deleteShipA"> Delete Ship from sea</a>
+                </li>
+                <li>
+                    <a id="attackA">Attack</a>
+                </li>
+                <li>
+                    <a id="winLossA">Win and Loss</a>
+                </li>
+            </ul>
+            </li>
+            <li> Setting
+                <ul>
+                    <li><a id="seaSizeA">Set sea size</a></li>
+                    <li><a id="shipA">Set ships</a></li>
+                </ul>
+            </li>
+            </ul>
+        </div>
+
+        <div class="border" data-aos="fade-up-left">
+            <h2>Add ship to sea</h2>
+
+            <section>
+                <a id="horizontal"></a>
+                <img class="rulePic" src="../../pic/addShip-horizontal.gif">
+                <p>
+                    Add horizontally
+                </p>
+                <p>
+                    <ol>
+                        <li>Make sure "Horizontal" radio button has been clicked</li>
+                        <li>Click "Add" button</li>
+                        <li>Click any position in the sea the you want to insert the ship</li>
+                    </ol>
+                </p>
+            </section>
+
+            <section>
+                <a id="vertical"></a>
+                <img class="rulePic" src="../../pic/addShip-vertical.gif">
+                <p>
+                    Add vertically
+                </p>
+                <p>
+                    <ol>
+                        <li>Make sure "Vertical" radio button has been clicked</li>
+                        <li>Click "Add" button</li>
+                        <li>Click any position in the sea that you want to insert the ship</li>
+                    </ol>
+                </p>
+            </section>
+        </div>
+
+        <div class="border" id="deleteShip" data-aos="fade-right">
+            <h2>Delete ship from sea</h2>
+            <img class="rulePic" src="../../pic/deleteShip.gif">
+            <section>
+                <p>
+                    <ol>
+                        <li>Make sure there are at least one ship inside the sea</li>
+                        <li>Click "Delete" button</li>
+                        <li>Click any ship in the sea that you want to delete</li>
+                    </ol>
+                    If the remaining amount of either one type of ship is 0, you can add this type of ship again after
+                    delete it from the sea.
+                </p>
+            </section>
+        </div>
+
+        <div class="border" id="attack" data-aos="fade-down-left">
+            <h2>Attack</h2>
+            <img class="rulePic" src="../../pic/attack.gif">
+            <section>
+                <p>
+                    Left-hand side is player's and right-hand side is enemy's sea.<br>
+                    For each round, player will attack the enemy by clicking any position inside enemy sea. Then, enemy
+                    will attack a position inside player sea.<br>
+                    There are three type of attack status:
+                    <ol>
+                        <li>The position hasn't been attacked. No symbol will be shown in this position</li>
+                        <li>The position has been attacked and there is a ship (hit). "H" symbol will be shown in this
+                            position</li>
+                        <li>The position has been attacked but there is a empty position (miss). "M" symbol will be
+                            shown in this position</li>
+                    </ol>
+                    If there are any ships has fully attacked (i.e. hit position = size of the ship), the counter for
+                    this type of ship will be decrease.
+                </p>
+            </section>
+        </div>
+
+        <div class="border" id="winAndLoss" data-aos="fade-up-right">
+            <h2>Win and Loss</h2>
+            <p>A dialog box will be shown to indicate the result</p>
+            <table width=100%>
+                <tr>
+                    <td>Win</td>
+                    <td>Loss</td>
+                </tr>
+                <tr>
+                    <td><img class="rulePic" src="../../pic/win.jpg"></td>
+                    <td><img class="rulePic" src="../../pic/loss.jpg"></td>
+                </tr>
+                <tr>
+                    <td>All the ships for enemy becomes 0</td>
+                    <td>All the ships for player becomes 0</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="border" id="setSeaSize" data-aos="fade-left">
+            <h2>Setting</h2>
+            <section>
+                <a id="setSeaSize"></a>
+                <img class="rulePic" src="../../pic/setSea.jpg">
+                <p>
+                    Set sea size
+                </p>
+                <p>
+                    The possible sea size is from 5x5 to 10x10. The default sea size is 10x10.<br>
+                    After changing, user can click the "back" button directly. The changed sea size will be saved
+                    automatically.
+                </p>
+            </section>
+            <section>
+                <a id="setShip"></a>
+                <img class="rulePic" src="../../pic/setShip.jpg">
+                <p>
+                    Set ships<br>
+                    It is possible to set the number of each type of ships independently.<br>
+                    The default number of each type of ships will change depends on the sea size.<br>
+                    After changing, user can click the "back" button directly. The changed ship number will be saved
+                    automatically.
+                </p>
+                <img class="rulePic" src="../../pic/setShip-exceed.jpg">
+                <p>
+                    When the instruction appears, it means the total ship size exceed the limit.<br>
+                    The last changed ship size will not be saved.<br>
+                    Please leave at least 40% of empty space inside the sea.<br>
+                </p>
+                <p id="limit"></p>
+            </section>
+        </div>
+
+
+        <!--scroll to top button-->
+        <button id="top">
+            <img id="upImg" src="../../pic/up.png">
+        </button>
+
+    </div>
+
+
+    <!--display effect for div-->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

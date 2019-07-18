@@ -1,0 +1,50 @@
+
+#sea-setting, #ship-setting{
+    width:100%;
+    height:500px;
+    padding:100px 0px;
+}
+
+.buttonConfirm{
+    width:100%;
+}
+
+.settingTable{
+    width:inherit;
+    height:100%;
+    table-layout: fixed;
+    border-spacing:20px;
+
+}
+
+.settingTableRow, .settingTableCell{
+    border:5px solid;
+    text-align:center;
+}
+
+.seaTable{
+    border:3px solid;
+    border-collapse: collapse;
+    margin:auto;
+}
+
+.seaTableRow, .seaTableCell{
+    border:3px solid;
+    border-collapse: collapse;
+    height:40px;
+    width:40px;
+    text-align:center;
+}
+
+.list{
+    width: 40%;
+    font-size:18px;
+    text-align:center;
+}
+
+#instruction-disappear{
+    display:none;
+}
+
+
+

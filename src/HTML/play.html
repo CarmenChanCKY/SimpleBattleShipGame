@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Play - BattleShip Game Play</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/index.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/setting.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/play.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!--Plug-in for alert()-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../JavaScript/main.js"></script>
+    <script src="../JavaScript/setSea.js"></script>
+    <script src="../JavaScript/play.js"></script>
+    <script>
+        $(document).ready(function () {
+            // UI
+            $(".content-fadeIn").fadeIn(2000);
+
+            $.getJSON("../../data.json", function (data) {
+                
+                setSea(data.shipType, data.shipSize);
+
+                $("#confirm").click(function () {
+                    if (checkSeaIsNull()) {
+                        $("#set-sea").fadeOut(2000, function () {
+                            setPlayPanel(data.shipType, data.shipSize);
+                            $("#sea-enemy").fadeIn(2000);
+                        });
+                    } else {
+                        // There are no any ship inside the sea
+                        swal("Please put at least one ship inside the sea!");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="content content-fadeIn">
+
+        <div class="back">
+            <button class="button" value="Back" onclick="openLink(this.value)">Back</button>
+        </div>
+
+        <div id="title">
+            <p>
+                <h1>Game Play</h1>
+            </p>
+        </div>
+
+        <div align="center">
+            <!--For player sea-->
+            <div id="sea-player" class="sea"></div>
+            <!--For enemy sea-->
+            <!--Display after clicking confirm button-->
+            <div id="sea-enemy"></div>
+        </div>
+
+        <!--Disappear after clicking confirm button-->
+        <div id="set-sea">
+            <table class="settingTable">
+                <tr class="settingTableRow">
+                    <td colspan="4">
+                        <p>Please set the number of ships for each type.</p>
+                    </td>
+                </tr>
+                <tr class="settingTableRow">
+                    <td class="settingTableCell" id="shipPlayTD1"></td>
+                    <td class="settingTableCell" id="shipPlayTD2"></td>
+                    <td class="settingTableCell" id="shipPlayTD3"></td>
+                    <td class="settingTableCell" id="shipPlayTD4"></td>
+                </tr>
+                <tr class="settingTableRow">
+                    <td colspan="4">
+                        <button class="button-confirm" value="Delete" onclick="deleteShipHandler()">Delete Ship</button>
+                    </td>
+                </tr>
+                <tr class="settingTableRow">
+                    <td colspan="4">
+                        <button class="button-confirm" id="confirm" value="Confirm">Confirm and start</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--Display after clicking confirm button-->
+        <div id="play-info">
+            <table class="settingTable">
+                <tr class="settingTableRow">
+                    <td colspan="2" id="playInfo1"></td>
+                </tr>
+                <tr class="settingTableRow">
+                    <td colspan="2" class="settingTableCell" id="playInfo2"></td>
+                </tr>
+                <tr class="settingTableRow">
+                    <td class="settingTableCell" id="playInfo3"></td>
+                    <td class="settingTableCell" id="playInfo4"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

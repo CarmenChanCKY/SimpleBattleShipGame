@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Setting - BattleShip Game Play</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/index.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/setting.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="../JavaScript/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".content-fadeIn").fadeIn(2000);
+
+            $.getJSON("../../data.json", function (data) {
+                // UI
+                shipSettingLayout(data.minNumberOfShip, data.maxNumberOfShip, data.shipType, data.shipSize);
+                seaSettingLayout(data.seaSize[0], data.seaSize[data.seaSize.length - 1], data.shipType, data.defaultNumberOfShip, data.shipSize);
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+
+    <div class="content content-fadeIn">
+        <div class="back">
+            <button class="button" value="Back" onclick="openLink(this.value)">Back</button>
+        </div>
+
+        <div id="title">
+            <p>
+                <h1>Setting</h1>
+            </p>
+        </div>
+
+        <!--Set the size of sea for player and enemy-->
+        <div id="sea-setting">
+            <p>
+                <table class="settingTable">
+                    <tr class="settingTableRow">
+                        <td colspan="2">
+                            <h2>Sea Size</h2>
+                        </td>
+                    </tr>
+                    <tr class="settingTableRow">
+                        <td id="sizeTD1"></td>
+                        <td class="settingTableCell" id="sizeTD2">
+                            <p>Please select the size of sea.</p>
+                        </td>
+                    </tr>
+                </table>
+            </p>
+        </div>
+
+        <!--Set the number of ships for player and enemy-->
+        <div id="ship-setting">
+
+            <p>
+                <table class="settingTable">
+                    <tr class="settingTableRow">
+                        <td colspan="4">
+                            <h2>Ship</h2>
+                        </td>
+                    </tr>
+                    <tr class="settingTableRow">
+                        <td colspan="4">
+                            <p>Please set the number of ships for each type.</p>
+                        </td>
+                    </tr>
+                    <tr class="settingTableRow">
+                        <td class="settingTableCell" id="shipTD1"></td>
+                        <td class="settingTableCell" id="shipTD2"></td>
+                        <td class="settingTableCell" id="shipTD3"></td>
+                        <td class="settingTableCell" id="shipTD4"></td>
+                    </tr>
+                    <tr class="settingTableRow">
+                        <td class="settingTableCell" colspan="4">
+                            <p id="shipP1"></p>
+                            <p id="shipP2"></p>
+                        </td>
+                    </tr>
+                </table>
+                <!--Alarm-->
+                <p id="instruction-disappear">Your used sea space exceed the limit!<br>
+                For the limit of each sea size, please refer to Rule page.</p>
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
