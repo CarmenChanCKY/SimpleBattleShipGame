@@ -18,8 +18,15 @@ function openLink(val) {
 }
 
 // check whether the content inside data.json has been read before
-function isStorageNull() {
+function isStorageEmpty() {
     if (sessionStorage.length == 0) {
+        return true;
+    }
+    return false;
+}
+
+function isStorageNull(token) {
+    if (sessionStorage.getItem(token) == null) {
         return true;
     }
     return false;

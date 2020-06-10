@@ -8,11 +8,11 @@
     <script src="src/JavaScript/main.js"></script>
     <script>
         $(document).ready(function () {
-           $(".buttonDiv").fadeIn(2000);
+            $(".buttonDiv").fadeIn(2000);
             // get the content of data.json
-           $.getJSON("data.json", function (data) {
-               
-                if (isStorageNull()) {
+            $.getJSON("data.json", function (data) {
+
+                if (isStorageEmpty()) {
                     // initialize the sea size and each type of ships
                     sessionStorage.setItem("seaSize", data.seaSize[data.seaSize.length - 1]);
                     sessionStorage.setItem("Carrier", data.defaultNumberOfShip[data.defaultNumberOfShip.length - 1][0]);
@@ -24,18 +24,34 @@
                     console.log(sessionStorage.getItem("Battleship"));
                     console.log(sessionStorage.getItem("Submarine"));
                     console.log(sessionStorage.getItem("Destroyer"));
-
-                }
-                console.log("sessionstorage not null");
-                console.log(sessionStorage.getItem("seaSize"));
+                } else {
+                    if (isStorageNull("seaSize")) {
+                        sessionStorage.setItem("seaSize", data.seaSize[data.seaSize.length - 1]);
+                    }
+                    if (isStorageNull("Carrier")) {
+                        sessionStorage.setItem("Carrier", data.defaultNumberOfShip[data.defaultNumberOfShip.length - 1][0]);
+                    } 
+                    if (isStorageNull("Battleship")) {
+                        sessionStorage.setItem("Battleship", data.defaultNumberOfShip[data.defaultNumberOfShip.length - 1][1]);
+                    } 
+                    if (isStorageNull("Submarine")) {
+                        sessionStorage.setItem("Submarine", data.defaultNumberOfShip[data.defaultNumberOfShip.length - 1][2]);
+                    } 
+                    if (isStorageNull("Destroyer")) {
+                        sessionStorage.setItem("Destroyer", data.defaultNumberOfShip[data.defaultNumberOfShip.length - 1][3]);
+                    }
+                    console.log("sessionstorage not null");
+                    console.log(sessionStorage.getItem("seaSize"));
                     console.log(sessionStorage.getItem("Carrier"));
                     console.log(sessionStorage.getItem("Battleship"));
                     console.log(sessionStorage.getItem("Submarine"));
                     console.log(sessionStorage.getItem("Destroyer"));
+                }
+
             });
 
         });
-        
+
     </script>
 </head>
 
@@ -43,13 +59,16 @@
     <div class="content">
         <div id="title">
             <p>
-                <h1>BattleShip Game Play</h1>
-                <img src="pic/battleship.jpg" alt="BattleShip">
+            <h1>BattleShip Game Play</h1>
+            <img src="pic/battleship.jpg" alt="BattleShip">
             </p>
         </div>
-        <div class="buttonDiv"><button class="button-main button" value="Play" onclick="openLink(this.value)">Play</button></div>
-        <div class="buttonDiv"><button class="button-main button" value="Setting" onclick="openLink(this.value)">Setting</button></div>
-        <div class="buttonDiv"><button class="button-main button" value="Rule" onclick="openLink(this.value)">Rule</button></div>
+        <div class="buttonDiv"><button class="button-main button" value="Play"
+                onclick="openLink(this.value)">Play</button></div>
+        <div class="buttonDiv"><button class="button-main button" value="Setting"
+                onclick="openLink(this.value)">Setting</button></div>
+        <div class="buttonDiv"><button class="button-main button" value="Rule"
+                onclick="openLink(this.value)">Rule</button></div>
     </div>
 </body>
 
