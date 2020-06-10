@@ -19,7 +19,14 @@
                     sessionStorage.setItem("Battleship", data.defaultNumberOfShip[data.defaultNumberOfShip.length - 1][1]);
                     sessionStorage.setItem("Submarine", data.defaultNumberOfShip[data.defaultNumberOfShip.length - 1][2]);
                     sessionStorage.setItem("Destroyer", data.defaultNumberOfShip[data.defaultNumberOfShip.length - 1][3]);
+                    console.log(sessionStorage.getItem("seaSize"));
+                    console.log(sessionStorage.getItem("Carrier"));
+                    console.log(sessionStorage.getItem("Battleship"));
+                    console.log(sessionStorage.getItem("Submarine"));
+                    console.log(sessionStorage.getItem("Destroyer"));
+
                 }
+                console.log("sessionstorage not null");
             });
 
         });
